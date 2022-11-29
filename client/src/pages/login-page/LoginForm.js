@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 //@mui
 import {
   TextField,
-  Link,
   Button,
   Typography,
   Box,
@@ -65,9 +64,9 @@ export default function LoginForm() {
     }
   };
 
-  const handleNavToRegister = () => {
-    navigate("/register", { replace: true });
-  }
+  const navToStart = () => {
+    navigate("/", { replace: true });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -90,7 +89,7 @@ export default function LoginForm() {
           src={Logo}
         />
         <Typography component="h1" variant="h4">
-          BK English Center
+          Đăng nhập
         </Typography>
         <Box component="form" sx={{ mt: 1 }}>
           <TextField
@@ -139,28 +138,15 @@ export default function LoginForm() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ height: 50, my: 2 }}
+            sx={{ height: 50, mt: 2, mb:1 }}
             onClick={handleSubmit}
           >
             Đăng nhập
           </Button>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            gap: 0.5,
-          }}
-        >
-          <Typography variant="body2">Bạn chưa có tài khoản?</Typography>
-          <Link
-            onClick={handleNavToRegister}
-            tabIndex={0}
-            component="button"
-            variant="body2"
-          >
-            {"Đăng ký"}
-          </Link>
-        </Box>
+        <Button onClick={navToStart} sx={{fontWeight: 500}}>
+          Quay lại
+        </Button>
       </Box>
     </Container>
   );

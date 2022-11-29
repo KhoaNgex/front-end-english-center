@@ -97,7 +97,7 @@ const typography = {
     textTransform: 'uppercase',
   },
   button: {
-    fontWeight: 500,
+    fontWeight: 600,
     lineHeight: 24 / 14,
     fontSize: pxToRem(16),
     textTransform: 'none',
