@@ -14,15 +14,17 @@ import {
   Button,
   Paper,
   Pagination,
+  IconButton,
 } from "@mui/material";
 
 import Iconify from "../../components/iconify";
 import Popup from "../../components/popup";
 
 import SaveAsOutlinedIcon from "@mui/icons-material/SaveAsOutlined";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
-const ITEM_PER_PAGE = 4;
-const MAX_PAGE = 4;
+const ITEM_PER_PAGE = 3;
+const MAX_PAGE = 5;
 
 const SYL = [
   {
@@ -50,11 +52,11 @@ export default function CourseCreatePage() {
   const [notiPage, setNotiPage] = useState(0);
   const [syllabus, setSyllabus] = useState(SYL);
   const [openPopup, setOpenPopup] = useState(false);
-  
+
   const navigate = useNavigate();
   const handleSave = () => {
     navigate("/app", { replace: true });
-  }
+  };
 
   return (
     <>
@@ -129,25 +131,32 @@ export default function CourseCreatePage() {
                 type="number"
               />
               <Button
-                sx={{ my: 3, height: 50, width: "100%" }}
                 variant="contained"
                 startIcon={<SaveAsOutlinedIcon />}
                 onClick={handleSave}
+                sx={{ mt: 2 }}
               >
                 Lưu khóa học
               </Button>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography variant="h6" gutterBottom sx={{ mb: 3 }}>
-                Chương trình học
-              </Typography>
-              <Button
-                variant="contained"
-                startIcon={<Iconify icon="eva:plus-fill" />}
-                onClick={() => setOpenPopup(true)}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
               >
-                Thêm buổi học
-              </Button>
+                <Typography variant="h6">Chương trình học</Typography>
+                <Button
+                  variant="contained"
+                  startIcon={<Iconify icon="eva:plus-fill" />}
+                  onClick={() => setOpenPopup(true)}
+                >
+                  Thêm buổi học
+                </Button>
+              </Box>
               <Paper
                 elevation={3}
                 sx={{
@@ -155,7 +164,7 @@ export default function CourseCreatePage() {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  mt: 5,
+                  mt: 4,
                 }}
               >
                 <Typography
@@ -172,36 +181,30 @@ export default function CourseCreatePage() {
                     notiPage * ITEM_PER_PAGE + ITEM_PER_PAGE
                   )
                   .map((item, idx) => {
-                    const { id, description } = item;
+                    const { description } = item;
                     return (
                       <Box
                         sx={{
                           padding: 2,
-                          paddingBottom: 1,
                           display: "flex",
                           flexDirection: "column",
                           bgcolor: "#ebf1ff",
                           borderRadius: 3,
                           mb: 2,
                           width: "100%",
-                          gap: 1,
+                          gap: 0.5,
                         }}
                       >
-                        <Typography variant="subtitle1">
-                          <em>Buổi thứ {idx + 1}</em>
-                        </Typography>
-                        <Typography
-                          variant="body1"
-                         
-                        >
-                          {description}
-                        </Typography>
-                        <Button
-                          sx={{ mb: 1 }}
-                          color="error"
-                        >
-                          Xóa
-                        </Button>
+                        <Box sx={{ display: "flex", flexDirection: "row", gap: 0.5, alignItems: "center" }}>
+                          <IconButton color="error" size="small">
+                            <RemoveCircleOutlineIcon />
+                          </IconButton>
+
+                          <Typography variant="subtitle1">
+                            <em>Buổi thứ {idx + 1}</em>
+                          </Typography>
+                        </Box>
+                        <Typography variant="body1" sx={{mx: 4.5}}>{description}</Typography>
                       </Box>
                     );
                   })}
@@ -224,9 +227,16 @@ export default function CourseCreatePage() {
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
+          <TextField
+            fullWidth
+            label="Thứ tự buổi"
+            name="index"
+            value=""
+            type="number"
+          />
           <TextField
             multiline
             rows={4}
@@ -236,7 +246,7 @@ export default function CourseCreatePage() {
             type="text"
             sx={{
               width: "100%",
-              mb: 2,
+              my: 2,
             }}
           />
           <Button

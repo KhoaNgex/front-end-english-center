@@ -21,8 +21,9 @@ const StyledRoot = styled("div")({
 
 const StyledPaper = styled(Paper)({
   padding: 30,
-  height: "95vh",
-  width: 600,
+  paddingTop: 40,
+  height: "92vh",
+  width: 500,
 });
 
 export default function LoginPage() {
